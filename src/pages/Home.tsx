@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Products from '../components/products';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import Box from '@mui/material/Box';
 import {getAllProducts} from '../utils/ApiHandler';
 import SearchBar from '../components/search';
 import {Product} from '../schema/index';
@@ -48,8 +47,8 @@ export default function Home() {
     return(
         <>  
             {loader && <Loader />}
-            <SearchBar onSelectCategory={searchByCategory} onProductSearch={searchByProduct} />
-            {(products.length > 0 )
+            {!loader && <SearchBar onSelectCategory={searchByCategory} onProductSearch={searchByProduct} />}
+            {(!loader && products.length > 0 )
                   ?
                 <>
                     <Products allProducts={products} openDetails={openDetails} />
