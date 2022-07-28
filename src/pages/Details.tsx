@@ -12,9 +12,9 @@ import {Product} from '../schema/index';
 export default function Details() {
     const {productId} = useParams();
     const [productData, setProductData] = useState<Product>();
-    useEffect(()=>{
+    useEffect(() => {
         if(productId) {
-            getProduct(productId).then((res)=>{
+            getProduct(productId).then((res) => {
                 setProductData(res);
             });
         }
