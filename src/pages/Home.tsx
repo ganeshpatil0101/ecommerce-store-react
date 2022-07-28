@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Products from '../components/products';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
 import {getAllProducts} from '../utils/ApiHandler';
 import SearchBar from '../components/search';
 import {Product} from '../schema/index';
@@ -10,10 +13,13 @@ export default function Home() {
     const navigate = useNavigate();
     const [products, setProducts] = useState<Product[]>([]);
     const productCopy = useRef<Product[]>([]);
+    const [loader, setLoader] = useState(false);
     useEffect(()=>{
+        setLoader(true);
         getAllProducts().then((data)=>{
             setProducts(data);
             productCopy.current = data;
+            setLoader(false);
         }).catch(e => console.error(e));
     }, []);
     const openDetails = (id: string) => {
@@ -36,16 +42,24 @@ export default function Home() {
             setProducts(productCopy.current);
         }
     }
+    const openAddProduct = () => {
+        navigate('addproduct')
+    }
     return(
         <>  
-            {products.length === 0 && <Loader />}
-
-            {products.length > 0 
-                &&    
+            {loader && <Loader />}
+            <SearchBar onSelectCategory={searchByCategory} onProductSearch={searchByProduct} />
+            {(products.length > 0 )
+                  ?
                 <>
-                    <SearchBar onSelectCategory={searchByCategory} onProductSearch={searchByProduct} />
                     <Products allProducts={products} openDetails={openDetails} />
+                        <div className="floatingBtn" onClick={openAddProduct}>
+                            <Fab size="medium" color="primary" aria-label="add">
+                                <AddIcon />
+                            </Fab>
+                        </div>
                 </>
+                : <p> No Products Found </p>
             }
         </>
     )

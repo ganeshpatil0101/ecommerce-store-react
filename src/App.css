@@ -7,3 +7,11 @@
     display: flex;
     height: 100vh;
 }
+.floatingBtn{
+    margin: 0;
+    top: auto;
+    right: 20px;
+    bottom: 20px;
+    left: auto;
+    position: fixed;
+}

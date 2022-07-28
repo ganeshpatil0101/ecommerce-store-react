@@ -15,3 +15,14 @@ export function getCategories() {
         return response.json();
     });
 }
+export function saveProduct(data: any) {
+    return fetch(`${BASE_URL}products`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(data),
+    }).then((response) => {
+        return response.json();
+    });
+}

@@ -29,7 +29,7 @@ export default function Products({allProducts, openDetails}:ProductsProps) {
                     </Typography>
                   </CardContent>
                   <CardActions style={{justifyContent: 'space-around'}}>
-                    <Typography>
+                    <Typography data-testid="price">
                       {toAmount(product.price)}
                     </Typography>
                     <Button size="small" onClick={()=> openDetails(product.id)}>View</Button>

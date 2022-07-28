@@ -11,9 +11,12 @@ export interface ProductsProps {
     allProducts?: Product[];
     openDetails: Function;
 }
-export interface CategoriesProps {
+export interface SearchBarProps {
     onSelectCategory: Function;
     onProductSearch: Function;
+}
+export interface CategoriesProps{
+    onSelectCategory: Function;
 }
 export interface Category{
     id: string;
