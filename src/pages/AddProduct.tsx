@@ -4,10 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import Categories from '../components/categories';
 import { Input } from '@mui/material';
 import { saveProduct } from '../utils/ApiHandler';
+import { useErrorHandler } from 'react-error-boundary';
 
 export default function AddProduct() {
     const navigate = useNavigate();
     const data = useRef<any>({developerEmail:'ganeshpatil0101@gmail.com'});
+    const handleError = useErrorHandler();
     const onSelectCategory = (selected: string) => {
         console.log('selected ', selected);
         data.current['category'] = selected;
@@ -23,7 +25,10 @@ export default function AddProduct() {
                 console.log(res);
                 alert("Product Saved successfully");
                 navigate('/');
-            }).catch((err) => console.error(err));
+            }).catch((err) => {
+                console.error(err);
+                handleError(new Error("Problem while saving product"));
+            });
         }
         event.preventDefault();
     }

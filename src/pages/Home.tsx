@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useErrorHandler} from 'react-error-boundary';
 import Products from '../components/products';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -13,13 +14,18 @@ export default function Home() {
     const [products, setProducts] = useState<Product[]>([]);
     const productCopy = useRef<Product[]>([]);
     const [loader, setLoader] = useState(false);
+    const handleError = useErrorHandler();
     useEffect(()=>{
         setLoader(true);
         getAllProducts().then((data: any)=>{
             setProducts(data.products);
             productCopy.current = data.products;
             setLoader(false);
-        }).catch(e => console.error(e));
+        }).catch(e => {
+            console.error(e);
+            handleError(new Error('There is problem while fetching products'));
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const openDetails = (id: string) => {
         navigate(`details/${id}`)

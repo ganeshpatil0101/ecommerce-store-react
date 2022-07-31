@@ -3,15 +3,20 @@ import { getCategories } from '../utils/ApiHandler';
 
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import {Category, CategoriesProps} from '../schema/index';
+import { useErrorHandler } from 'react-error-boundary';
 
 function Categories({onSelectCategory}: CategoriesProps) {
     const [categories, setCategories] = useState<Category[]>([]);
     const [cat, setCat] = useState('');
+    const handleError = useErrorHandler();
     useEffect(()=>{
-        getCategories().then((res)=>{
-            console.log(res);
+        getCategories().then((res: any)=>{
             setCategories(res.categories);
-        }).catch((err)=>{console.error(err)});
+        }).catch((e)=>{
+            console.error(e);
+            handleError(new Error("Problem while fetching categories"));
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleChange = (event: any):void => {

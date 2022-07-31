@@ -8,16 +8,19 @@ import Typography from '@mui/material/Typography';
 import {getProduct} from '../utils/ApiHandler';
 import { toAmount } from '../utils/index';
 import {Product} from '../schema/index';
+import { useErrorHandler } from 'react-error-boundary';
 
 export default function Details() {
     const {productId} = useParams();
     const [productData, setProductData] = useState<Product>();
+    const handleError = useErrorHandler();
     useEffect(() => {
         if(productId) {
             getProduct(productId).then((res: any) => {
                 setProductData(res.product);
             }).catch((e)=>{
                 console.error(e);
+                handleError(new Error('Problem while fetch product id '+productId));
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
