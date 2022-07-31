@@ -15,9 +15,9 @@ export default function Home() {
     const [loader, setLoader] = useState(false);
     useEffect(()=>{
         setLoader(true);
-        getAllProducts().then((data)=>{
-            setProducts(data);
-            productCopy.current = data;
+        getAllProducts().then((data: any)=>{
+            setProducts(data.products);
+            productCopy.current = data.products;
             setLoader(false);
         }).catch(e => console.error(e));
     }, []);

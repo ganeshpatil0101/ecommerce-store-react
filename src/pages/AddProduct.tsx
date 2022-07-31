@@ -20,6 +20,7 @@ export default function AddProduct() {
             alert("Please selected category");
         } else {
             saveProduct(data.current).then((res: any)=>{
+                console.log(res);
                 alert("Product Saved successfully");
                 navigate('/');
             }).catch((err) => console.error(err));
@@ -83,7 +84,7 @@ export default function AddProduct() {
                 </Paper>
             <br />
             <br />
-            <Link to="/">All Products</Link>
+            <Link to="/">Home</Link>
         </>
     )
 }

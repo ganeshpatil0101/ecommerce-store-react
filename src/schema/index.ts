@@ -1,5 +1,5 @@
 export interface Product {
-    id: string;
+    _id: string;
     avatar: string;
     description: string;
     name: string;
@@ -19,6 +19,6 @@ export interface CategoriesProps{
     onSelectCategory: Function;
 }
 export interface Category{
-    id: string;
+    _id: string;
     name: string;
 }

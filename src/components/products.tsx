@@ -13,12 +13,14 @@ export default function Products({allProducts, openDetails}:ProductsProps) {
     return (
           <Grid container spacing={3}>
             {allProducts && allProducts.map((product: Product) => (
-              <Grid item key={`${product.id}-${product.name}`} xs={12} sm={6} md={3}>
+              <Grid item key={`${product._id}-${product.name}`} xs={12} sm={6} md={3}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
                   <CardMedia
+                    className={'product-image'}
                     component="img"
+                    height="300"
                     image={product.avatar}
                     alt={product.description}
                   />
@@ -31,7 +33,7 @@ export default function Products({allProducts, openDetails}:ProductsProps) {
                     <Typography data-testid="price">
                       {toAmount(product.price)}
                     </Typography>
-                    <Button size="small" onClick={()=> openDetails(product.id)}>View</Button>
+                    <Button size="small" onClick={()=> openDetails(product._id)}>View</Button>
                   </CardActions>
                 </Card>
               </Grid>

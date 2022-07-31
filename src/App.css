@@ -15,3 +15,6 @@
     left: auto;
     position: fixed;
 }
+.product-image{
+    object-fit: contain!important;
+}

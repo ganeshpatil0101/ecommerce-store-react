@@ -12,6 +12,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 test('should render details page', async () => {
+    // @ts-ignore
     jest.spyOn(window, "fetch").mockResolvedValue({
         json: async () => ({
             name:'iPhone', 

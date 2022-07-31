@@ -4,12 +4,13 @@ import { getCategories } from '../utils/ApiHandler';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import {Category, CategoriesProps} from '../schema/index';
 
-export default function Categories({onSelectCategory}: CategoriesProps) {
+function Categories({onSelectCategory}: CategoriesProps) {
     const [categories, setCategories] = useState<Category[]>([]);
     const [cat, setCat] = useState('');
     useEffect(()=>{
         getCategories().then((res)=>{
-            setCategories(res);
+            console.log(res);
+            setCategories(res.categories);
         }).catch((err)=>{console.error(err)});
     }, []);
 
@@ -28,14 +29,14 @@ export default function Categories({onSelectCategory}: CategoriesProps) {
                     onChange={handleChange}
                     label="Search Category">
                 <MenuItem value="">
-                    <em>None</em>
+                    <em>All</em>
                 </MenuItem>
-                <MenuItem value="TEst">Test</MenuItem>
                 {categories && categories.map((category)=>{
-                    return (<MenuItem key={category.id} value={category.name}>{category.name}</MenuItem>)
+                    return (<MenuItem key={category._id} value={category.name}>{category.name}</MenuItem>)
                 })}
                 </Select>
             </FormControl>
     </>
     );
 }
+export default React.memo(Categories);

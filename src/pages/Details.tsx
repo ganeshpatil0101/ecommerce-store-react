@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Container } from '@mui/system';
-import { Card, Grid } from '@mui/material';
+import { Card, Chip, Grid } from '@mui/material';
 
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
@@ -14,8 +14,10 @@ export default function Details() {
     const [productData, setProductData] = useState<Product>();
     useEffect(() => {
         if(productId) {
-            getProduct(productId).then((res) => {
-                setProductData(res);
+            getProduct(productId).then((res: any) => {
+                setProductData(res.product);
+            }).catch((e)=>{
+                console.error(e);
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,6 +41,7 @@ export default function Details() {
                     <Typography variant="h4">
                         {toAmount(productData.price)}
                     </Typography>
+                    <Chip color="primary" variant="outlined" label={productData.category} />
                 </Grid>
             </Grid>
             <br />
@@ -51,7 +54,7 @@ export default function Details() {
             </Grid>
             <br />
             <br />
-            <Link to="/">All Products</Link>
+            <Link to="/">Home</Link>
         </Container>}
         </>
     )

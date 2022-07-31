@@ -5,7 +5,7 @@ import { Product } from '../schema';
 
 const productsList: Product[]= [
     {
-        id:'1',
+        _id:'1',
         avatar:'testImage',
         description:'iPhone 13',
         name:'iPhone',
