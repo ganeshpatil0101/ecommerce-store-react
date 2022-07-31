@@ -1,9 +1,9 @@
-import { Button, Grid, Paper, Typography } from '@mui/material';
 import React, { useRef } from 'react';
+import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import Categories from '../components/categories';
 import { Input } from '@mui/material';
-import { saveProduct } from '../utils/ApiHandler';
+import ApiHandler from '../utils/ApiHandler';
 import { useErrorHandler } from 'react-error-boundary';
 
 export default function AddProduct() {
@@ -21,7 +21,7 @@ export default function AddProduct() {
         if(!data.current.category && data.current.category === '') {
             alert("Please selected category");
         } else {
-            saveProduct(data.current).then((res: any)=>{
+            ApiHandler.saveProduct(data.current).then((res: any)=>{
                 console.log(res);
                 alert("Product Saved successfully");
                 navigate('/');

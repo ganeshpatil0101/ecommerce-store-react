@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { getCategories } from '../utils/ApiHandler';
+import ApiHandler from '../utils/ApiHandler';
 
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import {Category, CategoriesProps} from '../schema/index';
@@ -10,7 +10,7 @@ function Categories({onSelectCategory}: CategoriesProps) {
     const [cat, setCat] = useState('');
     const handleError = useErrorHandler();
     useEffect(()=>{
-        getCategories().then((res: any)=>{
+        ApiHandler.getCategories().then((res: any)=>{
             setCategories(res.categories);
         }).catch((e)=>{
             console.error(e);

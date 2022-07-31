@@ -1,11 +1,9 @@
 # UPayment Store
 
-## Todo Items
-
-### Routing
-### Testing
-
-
+## used Material Design library
+## used React-testing-library with jest for unit testing
+## used React-Error-Boundary for error handling
+## used Node-Cached library for cache handling
 
 To View Live Site , open following link 
-[Live](https://reactjs.org/).
+[Live](https://ecommerce-case-study.netlify.app/).

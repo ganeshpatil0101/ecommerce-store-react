@@ -5,7 +5,7 @@ import { Card, Chip, Grid } from '@mui/material';
 
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import {getProduct} from '../utils/ApiHandler';
+import ApiHandler from '../utils/ApiHandler';
 import { toAmount } from '../utils/index';
 import {Product} from '../schema/index';
 import { useErrorHandler } from 'react-error-boundary';
@@ -16,7 +16,7 @@ export default function Details() {
     const handleError = useErrorHandler();
     useEffect(() => {
         if(productId) {
-            getProduct(productId).then((res: any) => {
+            ApiHandler.getProduct(productId).then((res: any) => {
                 setProductData(res.product);
             }).catch((e)=>{
                 console.error(e);

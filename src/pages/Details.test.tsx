@@ -15,9 +15,12 @@ test('should render details page', async () => {
     // @ts-ignore
     jest.spyOn(window, "fetch").mockResolvedValue({
         json: async () => ({
-            name:'iPhone', 
-            price:'999', 
-            description:'my phone 13 with 128 GB'}),
+            product:{
+                name:'iPhone', 
+                price:'999', 
+                description:'my phone 13 with 128 GB'
+            }
+        }),
       });
     render(<>
     <BrowserRouter>

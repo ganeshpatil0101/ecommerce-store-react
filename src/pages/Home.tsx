@@ -4,7 +4,7 @@ import {useErrorHandler} from 'react-error-boundary';
 import Products from '../components/products';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import {getAllProducts} from '../utils/ApiHandler';
+import ApiHandler from '../utils/ApiHandler';
 import SearchBar from '../components/search';
 import {Product} from '../schema/index';
 import Loader from '../components/loader';
@@ -17,7 +17,7 @@ export default function Home() {
     const handleError = useErrorHandler();
     useEffect(()=>{
         setLoader(true);
-        getAllProducts().then((data: any)=>{
+        ApiHandler.getAllProducts().then((data: any)=>{
             setProducts(data.products);
             productCopy.current = data.products;
             setLoader(false);
